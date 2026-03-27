@@ -18,7 +18,7 @@
 
 ## Overview
 
-**SnapCart** is a production-ready, full-stack grocery delivery platform developed over 60 days. It provides customers with a seamless end-to-end shopping experience — from browsing and searching products to secure checkout, delivery slot selection, and real-time order tracking — while giving administrators full control through a dedicated management dashboard.
+**SnapCart** is a production-ready, full-stack grocery delivery platform developed. It provides customers with a seamless end-to-end shopping experience — from browsing and searching products to secure checkout, delivery slot selection, and real-time order tracking — while giving administrators full control through a dedicated management dashboard.
 
 The project is built entirely with the Next.js App Router, making use of server-side rendering, server actions, and API routes to deliver a fast, scalable, and maintainable architecture.
 
@@ -174,5 +174,5 @@ This project is licensed under the [MIT License](LICENSE).
 ---
 
 <div align="center">
-  <sub>Built with dedication over 60 days 🛒</sub>
+  <sub>Built with dedication 🛒</sub>
 </div>
