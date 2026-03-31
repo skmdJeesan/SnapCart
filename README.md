@@ -56,7 +56,7 @@ The project is built entirely with the Next.js App Router, making use of server-
 | **Styling** | [Tailwind CSS](https://tailwindcss.com/) |
 | **Database** | [MongoDB](https://www.mongodb.com/) with Mongoose ODM |
 | **Authentication** | [NextAuth.js](https://next-auth.js.org/) — Google OAuth & Credentials |
-| **Payments** | [Stripe](https://stripe.com/) / [Razorpay](https://razorpay.com/) |
+| **Payments** | [Stripe](https://stripe.com/) |
 | **Media Storage** | [Cloudinary](https://cloudinary.com/) |
 | **Deployment** | [Vercel](https://vercel.com/) |
 
@@ -106,10 +106,6 @@ GOOGLE_CLIENT_SECRET=your_google_client_secret
 STRIPE_SECRET_KEY=your_stripe_secret_key
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=your_stripe_publishable_key
 STRIPE_WEBHOOK_SECRET=your_stripe_webhook_secret
-
-# Razorpay (if applicable)
-RAZORPAY_KEY_ID=your_razorpay_key_id
-RAZORPAY_KEY_SECRET=your_razorpay_key_secret
 
 # Cloudinary
 CLOUDINARY_CLOUD_NAME=your_cloud_name
