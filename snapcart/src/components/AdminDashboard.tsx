@@ -1,8 +1,11 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { motion } from "motion/react"
 import { IndianRupee, Package, Truck, Users } from 'lucide-react'
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis } from 'recharts'
+import { useSelector } from 'react-redux'
+import { RootState } from '../redux/store'
+import { getSocket } from '../lib/socket'
 
 type propType = {
   earning: { today: number, sevenDays: number, total: number }
@@ -14,6 +17,15 @@ function AdminDashboard({ earning, stats, chartData }: propType) {
   const [filter, setFilter] = useState<'today' | 'sevenDays' | 'total'>()
   const curr_earning = ((filter === 'today') ? earning.today : ((filter === 'sevenDays') ? earning.sevenDays : earning.total))
   const title = ((filter === 'today') ? "Today's Earning" : ((filter === 'sevenDays') ? 'Last 7 days Earning' : 'Total Earning'))
+
+  const userData = useSelector((state: RootState) => state.user.userData)
+
+  useEffect(() => {
+    if (userData?._id) {
+      const socket = getSocket()
+      socket.emit('identity', userData._id)
+    }
+  }, [userData?._id])
 
   return (
     <div className='pt-28 w-[90%] md:w-[80%] mx-auto'>

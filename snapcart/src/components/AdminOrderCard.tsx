@@ -59,13 +59,13 @@ function AdminOrderCard({ order }: { order: IOrder }) {
   }
 
   useEffect((): any => {
-      const socket = getSocket()
-      socket.on('order-status-update', (data) => {
-        if (data.orderId.toString() == order._id?.toString())
-          setStatus(data.status)
-      })
-      return () => socket.off('order-status-update')
-    }, [])
+    const socket = getSocket()
+    socket.on('order-status-update', (data) => {
+      if (data.orderId.toString() == order._id?.toString())
+        setStatus(data.status)
+    })
+    return () => socket.off('order-status-update')
+  }, [])
 
   return (
     <motion.div

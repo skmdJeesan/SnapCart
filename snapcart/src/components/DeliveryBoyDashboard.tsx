@@ -26,20 +26,23 @@ const DeliveryBoyDashboard = ({ earning }: {earning: number}) => {
   const [otpError, setOtpError] = useState('')
   const [sendOtpLoading, setSendOtpLoading] = useState(false)
   const [verifyOtpLoading, setVerifyOtpLoading] = useState(false)
-  // FIX #5: Added a loading state so the UI doesn't flash "No Active Deliveries"
-  // while the initial data fetch is still in progress.
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     const socket = getSocket()
-    if (!userData?._id) return
-    if (!navigator.geolocation) return
+    if (userData?._id) {
+      socket.emit('identity', userData._id)
+    }
+  }, [userData?._id])
+
+  useEffect(() => {
+    const socket = getSocket()
     const watcher = navigator.geolocation.watchPosition(
       (pos) => {
         const lat = pos.coords.latitude
         const lon = pos.coords.longitude
         setDeliveryBoyLocation({ latitude: lat, longitude: lon })
-        socket.emit('update-location', { userId: userData._id, latitude: lat, longitude: lon })
+        socket.emit('update-location', { userId: userData?._id, latitude: lat, longitude: lon })
       },
       (err) => { console.log(err) },
       { enableHighAccuracy: true }

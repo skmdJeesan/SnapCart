@@ -6,6 +6,8 @@ import axios from 'axios'
 import { ArrowLeft } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/src/redux/store'
 
 interface IOrder {
   _id?: string;
@@ -43,6 +45,14 @@ interface IOrder {
 const ManageOrders = () => {
   const router = useRouter()
   const [orders, setOrders] = useState<IOrder[]>([])
+  const userData = useSelector((state: RootState) => state.user.userData)
+
+  useEffect(() => {
+    if (userData?._id) {
+      const socket = getSocket()
+      socket.emit('identity', userData._id)
+    }
+  }, [userData?._id])
   useEffect(() => {
     const getOrders = async () => {
       try {
@@ -59,7 +69,7 @@ const ManageOrders = () => {
   useEffect(() => {
     const socket = getSocket()
     socket.on('new-order', (newOrder) => {
-      console.log(newOrder)
+      // console.log(newOrder)
       setOrders(prev => [newOrder, ...prev])
     })
     socket.on('order-assigned', ({orderId, assignedDeliverBoy}) => {
