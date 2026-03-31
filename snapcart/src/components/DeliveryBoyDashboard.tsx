@@ -237,7 +237,7 @@ const DeliveryBoyDashboard = ({ earning }: {earning: number}) => {
                 <YAxis />
                 <Tooltip />
                 <Legend />
-                <Bar dataKey="earnings" name="Earnings (₹)" />
+                <Bar dataKey="earning" name="Earnings (₹)" />
                 <Bar dataKey="deliveries" name="Deliveries" />
               </BarChart>
             </ResponsiveContainer>

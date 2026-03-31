@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
 
     order.status = 'delivered'
     order.deliveryOtpVerification = true
-    order.deliverAt = new Date()
+    order.deliveredAt = new Date()
     await order.save()
     await emitEventHandler('order-status-update', {orderId: order._id, status: order.status})
 
