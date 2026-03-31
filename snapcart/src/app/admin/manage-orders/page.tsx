@@ -72,9 +72,9 @@ const ManageOrders = () => {
       // console.log(newOrder)
       setOrders(prev => [newOrder, ...prev])
     })
-    socket.on('order-assigned', ({orderId, assignedDeliverBoy}) => {
+    socket.on('order-assigned', ({orderId, assignedDeliveryBoy}) => {
       setOrders(prev => (
-        prev?.map(o => o._id == orderId ? {...o, assignedDeliverBoy}: o)
+        prev?.map(o => o._id == orderId ? {...o, assignedDeliveryBoy}: o)
       ))
     })
     return () => {

@@ -7,6 +7,8 @@ import { motion } from "framer-motion"
 import UserOrderCard from "@/src/components/UserOrderCard"
 import { IUser } from "@/src/models/user.model"
 import { getSocket } from "@/src/lib/socket"
+import { useSelector } from "react-redux"
+import { RootState } from "@/src/redux/store"
 
 interface IOrder {
   _id?: string;
@@ -45,6 +47,15 @@ const MyOrders = () => {
   const router = useRouter()
   const [orders, setOrders] = useState<IOrder[]>([])
   const [loading, setLoading] = useState(true)
+  const userData = useSelector((state: RootState) => state.user.userData)
+
+  useEffect(() => {
+    if (userData?._id) {
+      const socket = getSocket()
+      socket.emit('identity', userData._id)
+    }
+  }, [userData?._id])
+  
   useEffect(() => {
     const getMyOrders = async () => {
       try {
@@ -62,9 +73,9 @@ const MyOrders = () => {
 
   useEffect((): any => {
     const socket = getSocket()
-    socket.on('order-assigned', ({orderId, assignedDeliverBoy}) => {
+    socket.on('order-assigned', ({orderId, assignedDeliveryBoy}) => {
       setOrders(prev => (
-        prev?.map(o => o._id == orderId ? {...o, assignedDeliverBoy}: o)
+        prev?.map(o => o._id == orderId ? {...o, assignedDeliveryBoy}: o)
       ))
     })
 
