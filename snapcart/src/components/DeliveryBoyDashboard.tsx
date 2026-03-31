@@ -15,7 +15,7 @@ interface ILocation {
   longitude: number
 }
 
-const DeliveryBoyDashboard = ({ earning }: {earning: number}) => {
+const DeliveryBoyDashboard = ({ earning, totalEarning, lastSevenDaysEarning }: {earning: number, totalEarning: number, lastSevenDaysEarning: number}) => {
   const [assignment, setAssignment] = useState<IDelivery[] | any[]>([])
   const [activeOrder, setActiveOrder] = useState<any>(null)
   const [userLocation, setUserLocation] = useState<ILocation>({ latitude: 0, longitude: 0 })
@@ -241,6 +241,10 @@ const DeliveryBoyDashboard = ({ earning }: {earning: number}) => {
                 <Bar dataKey="deliveries" name="Deliveries" />
               </BarChart>
             </ResponsiveContainer>
+            <div className="mt-4 text-center">
+              <p className="text-gray-700">Total Earnings: <span className="font-bold text-green-600">₹{totalEarning}</span></p>
+              <p className="text-gray-700">Last 7 Days Earnings: <span className="font-bold text-green-600">₹{lastSevenDaysEarning}</span></p>
+            </div>
           </div>
         </div>
       </div>
